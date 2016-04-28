@@ -1,4 +1,5 @@
 allow-deny@1.0.4
+altapp:recaptcha@2.0.1
 autoupdate@1.2.9
 babel-compiler@6.6.4
 babel-runtime@0.1.8
@@ -24,6 +25,7 @@ ejson@1.0.11
 es5-shim@4.5.10
 fastclick@1.0.11
 geojson-utils@1.0.8
+handlebars@1.0.7
 hot-code-push@1.0.4
 html-tools@1.0.9
 htmljs@1.0.9
@@ -69,6 +71,7 @@ standard-minifier-js@1.0.6
 templating@1.1.9
 templating-tools@1.0.4
 tracker@1.0.13
+twbs:bootstrap@3.3.6
 ui@1.0.11
 underscore@1.0.8
 url@1.0.9

@@ -4,7 +4,6 @@ var host = window.document.location.host.replace(/:.*/, '');
 var vdpRequester=new VDPrequester('ws://'+host+':'+Meteor.settings.public.WS_PORT);
 
 Template.gotwork.onRendered(function() {
-
     Meteor.subscribe('library',{onReady: function() {
         $('.example').each(function() {
             var example=$(this);
@@ -17,9 +16,6 @@ Template.gotwork.onRendered(function() {
         });
     }});
 
-    grecaptcha.render(document.getElementById('captcha'),{
-        sitekey: '6LdPdx4TAAAAAG9flA_8cvluOQ3YvSHF9zmXwFy2'
-    });
     $('#server').sunlight();
     $('#disconnect').sunlight();
 });
@@ -79,6 +75,7 @@ Template.gotwork.events({
             description: $('#description').val(),
             link: $('#link').val(),
             url: $('#url').val(),
+            example: false,
             confirmed: false
         };
         libraryDB.insert(document,function(error) {

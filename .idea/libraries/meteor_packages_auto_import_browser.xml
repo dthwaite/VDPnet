@@ -5,9 +5,11 @@
         <item url="file://$USER_HOME$/.meteor/packages/iron_core/1.0.11/web.browser/lib/iron_core.js" />
         <item url="file://$USER_HOME$/.meteor/packages/ddp-server/1.2.6/web.browser/session_view_tests.js" />
         <item url="file://$USER_HOME$/.meteor/packages/iron_core/1.0.11/web.browser/lib/version_conflict_error.js" />
+        <item url="file://$USER_HOME$/.meteor/packages/twbs_bootstrap/3.3.6/web.browser/dist/css/bootstrap.css" />
         <item url="file://$USER_HOME$/.meteor/packages/ddp-server/1.2.6/web.browser/crossbar.js" />
         <item url="file://$USER_HOME$/.meteor/packages/ddp-server/1.2.6/web.browser/writefence.js" />
         <item url="file://$USER_HOME$/.meteor/packages/ddp-server/1.2.6/web.browser/server_convenience.js" />
+        <item url="file://$USER_HOME$/.meteor/packages/twbs_bootstrap/3.3.6/web.browser/dist/js/bootstrap.js" />
         <item url="file://$USER_HOME$/.meteor/packages/ddp-server/1.2.6/web.browser/stream_server.js" />
         <item url="file://$USER_HOME$/.meteor/packages/iron_dynamic-template/1.0.12/web.browser/blaze_overrides.js" />
         <item url="file://$USER_HOME$/.meteor/packages/ddp-server/1.2.6/web.browser/crossbar_tests.js" />
@@ -163,6 +165,7 @@
         <item url="file://$USER_HOME$/.meteor/packages/ejson/1.0.11/web.browser/ejson.js" />
         <item url="file://$USER_HOME$/.meteor/packages/ejson/1.0.11/web.browser/stringify.js" />
         <item url="file://$USER_HOME$/.meteor/packages/ecmascript-runtime/0.2.10/web.browser/runtime.js" />
+        <item url="file://$USER_HOME$/.meteor/packages/altapp_recaptcha/2.0.1/web.browser/client/client.js" />
         <item url="file://$USER_HOME$/.meteor/packages/ecmascript-runtime/0.2.10/web.browser/runtime-tests.js" />
         <item url="file://$USER_HOME$/.meteor/packages/iron_controller/1.0.12/web.browser/lib/controller.js" />
         <item url="file://$USER_HOME$/.meteor/packages/iron_controller/1.0.12/web.browser/lib/controller_client.js" />
@@ -174,9 +177,11 @@
       <root url="file://$USER_HOME$/.meteor/packages/iron_core/1.0.11/web.browser/lib/iron_core.js" />
       <root url="file://$USER_HOME$/.meteor/packages/ddp-server/1.2.6/web.browser/session_view_tests.js" />
       <root url="file://$USER_HOME$/.meteor/packages/iron_core/1.0.11/web.browser/lib/version_conflict_error.js" />
+      <root url="file://$USER_HOME$/.meteor/packages/twbs_bootstrap/3.3.6/web.browser/dist/css/bootstrap.css" />
       <root url="file://$USER_HOME$/.meteor/packages/ddp-server/1.2.6/web.browser/crossbar.js" />
       <root url="file://$USER_HOME$/.meteor/packages/ddp-server/1.2.6/web.browser/writefence.js" />
       <root url="file://$USER_HOME$/.meteor/packages/ddp-server/1.2.6/web.browser/server_convenience.js" />
+      <root url="file://$USER_HOME$/.meteor/packages/twbs_bootstrap/3.3.6/web.browser/dist/js/bootstrap.js" />
       <root url="file://$USER_HOME$/.meteor/packages/ddp-server/1.2.6/web.browser/stream_server.js" />
       <root url="file://$USER_HOME$/.meteor/packages/iron_dynamic-template/1.0.12/web.browser/blaze_overrides.js" />
       <root url="file://$USER_HOME$/.meteor/packages/ddp-server/1.2.6/web.browser/crossbar_tests.js" />
@@ -332,6 +337,7 @@
       <root url="file://$USER_HOME$/.meteor/packages/ejson/1.0.11/web.browser/ejson.js" />
       <root url="file://$USER_HOME$/.meteor/packages/ejson/1.0.11/web.browser/stringify.js" />
       <root url="file://$USER_HOME$/.meteor/packages/ecmascript-runtime/0.2.10/web.browser/runtime.js" />
+      <root url="file://$USER_HOME$/.meteor/packages/altapp_recaptcha/2.0.1/web.browser/client/client.js" />
       <root url="file://$USER_HOME$/.meteor/packages/ecmascript-runtime/0.2.10/web.browser/runtime-tests.js" />
       <root url="file://$USER_HOME$/.meteor/packages/iron_controller/1.0.12/web.browser/lib/controller.js" />
       <root url="file://$USER_HOME$/.meteor/packages/iron_controller/1.0.12/web.browser/lib/controller_client.js" />

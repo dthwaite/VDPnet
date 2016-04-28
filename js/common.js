@@ -6,6 +6,12 @@ Meteor.startup(function() {
     clientDB=new Mongo.Collection('clients');       // eslint-disable-line no-undef
     requestorDB=new Mongo.Collection('requestors'); // eslint-disable-line no-undef
     servicerDB=new Mongo.Collection('servicers');   // eslint-disable-line no-undef
+
+    if (Meteor.isClient) {
+        reCAPTCHA.config({
+            publickey: '6LdPdx4TAAAAAG9flA_8cvluOQ3YvSHF9zmXwFy2'
+        });
+    }
 });
 
 Router.route('/', function() {
