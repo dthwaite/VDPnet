@@ -7,6 +7,7 @@ importScripts('https://cdn.rawgit.com/dthwaite/VDPrequester/v1.0.0/lib/vdpreques
     var JobStreams=[];  // The list of streams that execute jobs
     var jobStreamIds=1; // Incremental ids of Job streams
     var closing;        // true if this worker is closing down
+    var server;         // The VDP server
 
     // Sets up a listener to the controlling web page
     addEventListener('message',function(event) {
@@ -15,7 +16,8 @@ importScripts('https://cdn.rawgit.com/dthwaite/VDPrequester/v1.0.0/lib/vdpreques
             closing=false;
             if (typeof library=='undefined') {
                 library=event.data.library;
-                vdpRequester=new VDPrequester(event.data.server);
+                server=event.data.server;
+                vdpRequester=new VDPrequester(server);
                 importScripts(library.url);
                 postMessage(workerReport('wk_start'));
             }
@@ -52,7 +54,7 @@ importScripts('https://cdn.rawgit.com/dthwaite/VDPrequester/v1.0.0/lib/vdpreques
         this.job=null;
         this.start=new Date().getTime();
         this.cpu=0;
-        this.websocket=new WebSocket('ws://127.0.0.1:8080','S'+library.name);
+        this.websocket=new WebSocket(server,'S'+library.name);
         this.websocket.onmessage=function(event) {
             me.startJob(event.data);
         };
