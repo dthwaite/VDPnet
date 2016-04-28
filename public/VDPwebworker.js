@@ -154,8 +154,6 @@ importScripts('https://cdn.rawgit.com/dthwaite/VDPrequester/v1.0.0/lib/vdpreques
 
     Job.prototype.setActive=function(state) {
         this.state=state ? 'working' : 'idle';
-        if (state) this.cpustart=self.performance.now();
-        else this.cpu+=(self.performance.now()-this.cpustart);
         if (this.percent<100) postMessage(this.report('job_status'));
     };
 

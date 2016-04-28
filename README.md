@@ -10,9 +10,9 @@ Volunteering your device to do work is easy. Go to my [VDPnet](http://vdpnet.clo
 
 This site not only allows you to volunteer your device to process jobs for other people. It also provides instructions on how to define and submit your own jobs.
 
-My VDP network is, in truth, an experimental working prototype which I first published on 28-April-2016. I doubt anyone's volunteering!
+My VDP network is an experimental working prototype which I first published on 28-April-2016. I doubt anyone's volunteering!
 
-There are, of course, rather more established volunteer processing systems. This one simply exhibits the bare essentials of such a system and does so exclusively in the context of browsers and `javascript`, thus making it very easy, simple and accessible.
+There are, of course, rather more established and sophisticated volunteer processing systems. This one simply exhibits the bare essentials of such a system and does so exclusively in the context of browsers and `javascript`, thus making it very easy, simple and accessible.
 
 Any suggestions as to how to take this further or interest from others is always welcome...use my gitter link above.
 

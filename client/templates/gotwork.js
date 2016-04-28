@@ -8,11 +8,13 @@ Template.gotwork.onRendered(function() {
     Meteor.subscribe('library',{onReady: function() {
         $('.example').each(function() {
             var example=$(this);
-            example.load(libraryDB.findOne({name: example.data('example')},{fields: {url: 1,_id: 0}}).url,function(text) {
-                example.text(text).sunlight();
-            });
+            var library=libraryDB.findOne({name: example.data('example')},{fields: {url: 1,_id: 0}});
+            if (library && library.url.length>0) {
+                example.load(library.url, function (text) {
+                    example.text(text).sunlight();
+                });
+            }
         });
-
     }});
 
     grecaptcha.render(document.getElementById('captcha'),{
@@ -43,8 +45,8 @@ Template.gotwork.events({
         var box = demo.find('.javascript').empty();
         if (!Number.isNaN(input) && input > 0) {
             javascript = 'vdpRequester.send("' + job + '",' + input + ',function(error,result) {\n\t' +
-                'if (error) outputText.text(error).removeClass("label-success").addClass("label-danger");\n\t' +
-                'else outputText.text(result).removeClass("label-danger").addClass("label-success");\n});';
+                'if (error) outputText.text(error).removeClass("label-warning label-success").addClass("label-danger");\n\t' +
+                'else outputText.text(result).removeClass("label-warning label-danger").addClass("label-success");\n});';
             box.append('<pre class="sunlight-highlight-javascript">' + javascript + '</pre>').find('pre').sunlight();
         }
 
@@ -53,6 +55,7 @@ Template.gotwork.events({
         var row = $(event.target).closest('.demo');
         var outputText = row.find('.demo-result'); // eslint-disable-line no-unused-vars
         var code = row.find('.sunlight-javascript').text();
+        outputText.html('No response yet? Maybe you should <a href="http://'+host+'" target="_blank">volunteer</a>').removeClass("label-danger").removeClass("label-success").addClass("label-warning");
         eval(code);
     },
     'click button[type=submit]': function() {
