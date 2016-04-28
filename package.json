@@ -1,0 +1,38 @@
+{
+  "name": "VDPnet",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Volunteer Distributed Processing Network",
+  "homepage": "http://vdpnet.cloud",
+  "keywords": [
+    "distributed processing",
+    "volunteer network",
+    "processing jobs"
+  ],
+  "author": "Dominic Thwaites <dominicthwaites@mac.com> (http://www.domt.name)",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:dthwaite/VDPnet.git"
+  },
+  "bugs": {
+    "url": "https://github.com/dthwaite/VDPnet/issues",
+    "email": "dominicthwaites@mac.com"
+  },
+  "scripts": {
+    "start": "meteor --settings settings.json run",
+    "lint": "eslint client/templates js public/*.js server"
+  },
+  "dependencies": {
+    "bufferutil": "^1.2.1",
+    "le_node": "^1.3.0",
+    "meteor-node-stubs": "~0.2.0",
+    "utf-8-validate": "^1.2.1"
+  },
+  "devDependencies": {
+    "eslint": "^2.2.0",
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">= 2.2.x"
+  }
+}

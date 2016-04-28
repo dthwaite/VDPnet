@@ -1,0 +1,92 @@
+@import url(https://fonts.googleapis.com/css?family=Source+Code+Pro);
+@import url(https://fonts.googleapis.com/css?family=Exo+2:400,600);
+
+body {
+    font-family: 'Exo 2', sans-serif !important;
+}
+
+.show-if-space {
+    display:none;
+}
+
+@media screen and (min-width: 768px) {
+    th.show-if-space,td.show-if-space {
+        display: table-cell;
+    }
+}
+
+.container {
+    background-color: #eeeeee;
+}
+
+.page-header h1, .panel-warning {
+    text-align: center;
+}
+
+.progress {
+    margin-bottom:0px !important;
+}
+
+.idle {
+    background-color: #5cb85c;
+}
+.working {
+    background-color: #d9534f;
+}
+
+#footnote {
+    text-align: right;
+}
+
+#explanation {
+    font-size: 1.2em;
+}
+
+.worker-description {
+    padding: 10px 5px 0px 10px;
+}
+
+.gist-link {
+    color: white;
+}
+
+.footer {
+    margin-bottom: 20px;
+}
+
+.sunlight-highlight-javascript {
+    padding: inherit;
+    background-color: inherit;
+    border:0;
+}
+
+.demo-result {
+    text-align: center;
+    font-weight: bold;
+}
+
+.demo-input {
+    width:100px;
+}
+
+.demo table td {
+    padding-left: 5px;
+    padding-right:5px;
+}
+
+form table td {
+    padding-right:10px;
+}
+
+#formConfirmation, #formError {
+    display:none;
+}
+
+.status-table {
+    overflow-x: auto;
+    border: 0 !important;
+}
+
+#submit-section {
+    margin-top: 10px;
+}

@@ -1,0 +1,97 @@
+<template name="status">
+    <div class="container">
+        <div class="page-header">
+            <h1>Network job status</h1>
+        </div>
+        <div class="row">
+            <div class="col-sm-10">
+                <table class="table table-striped table-bordered table-condensed status-table col-xs-12">
+                    <caption>Jobs created but not delivered over the past 24 hours</caption>
+                    <thead>
+                    <tr class="warning">
+                        <th>Status</th>
+                        <th>Library</th>
+                        <th>Created</th>
+                        <th class="show-if-space">Waiting</th>
+                        <th class="show-if-space">Dispatched</th>
+                        <th class="show-if-space">Completed</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {{#each jobs}}
+                        <tr>
+                            <td>{{status}}</td>
+                            <td>{{library}}</td>
+                            <td>{{formatDate created}}</td>
+                            <td class="show-if-space">{{formatTime waiting}}</td>
+                            <td class="show-if-space">{{formatTime dispatched}}</td>
+                            <td class="show-if-space">{{formatTime completed}}</td>
+                        </tr>
+                    {{/each}}
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-sm-6 col-lg-4">
+                <table class="table table-striped table-bordered table-condensed status-table col-xs-12">
+                    <caption>Devices that are currently volunteering their services</caption>
+                    <thead>
+                    <tr class="warning">
+                        <th>IP address</th>
+                        <th>Libraries</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {{#each clients}}
+                        <tr>
+                            <td>{{ip}}</td>
+                            <td>{{libraries}}</td>
+                        </tr>
+                    {{/each}}
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-sm-6 col-lg-4">
+                <table class="table table-striped table-bordered table-condensed status-table">
+                    <caption>Connections from devices that are requesting jobs</caption>
+                    <thead>
+                    <tr class="warning">
+                        <th>IP address</th>
+                        <th>Library</th>
+                        <th># requests</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {{#each requestors}}
+                        <tr>
+                            <td>{{ip}}</td>
+                            <td>{{library}}</td>
+                            <td>{{requests}}</td>
+                        </tr>
+                    {{/each}}
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-sm-6 col-lg-4">
+                <table class="table table-striped table-bordered table-condensed status-table">
+                    <caption>Connections from devices that are servicing jobs</caption>
+                    <thead>
+                    <tr class="warning">
+                        <th>IP address</th>
+                        <th>Library</th>
+                        <th># jobs</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {{#each servicers}}
+                        <tr>
+                            <td>{{ip}}</td>
+                            <td>{{library}}</td>
+                            <td>{{jobCount}}</td>
+                        </tr>
+                    {{/each}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</template>

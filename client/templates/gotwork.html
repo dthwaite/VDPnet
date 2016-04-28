@@ -1,0 +1,154 @@
+<template name="gotwork">
+    <div class="container">
+        <div class="page-header">
+            <h1>Defining and invoking jobs</h1>
+        </div>
+        <p>This is an experimental project and so don't expect this procedure to be all slick and fancy.
+            It's all open source as is any code that executes the jobs. That said, it's pretty simple.</p>
+        <h3>The code to run jobs</h3>
+        <p>Code must be <code>javascript</code>. Javascript that runs in a <em>Web Worker</em>.
+            This means it has no access to any DOM, must be pure JS and use only features available in a Web Worker.
+        In particular you can still:
+        <ul>
+            <li>make <code>XMLHttpRequest</code> calls</li>
+            <li>include further scripts and libraries with <code>importScripts()</code></li>
+            <li>or even spawn your own web workers</li>
+        </ul></p>
+        <h4>Two simple examples:</h4>
+        <div class="well well-sm">
+            <pre class="example sunlight-highlight-javascript" data-example="sumofroots"></pre>
+            <p>A fairly useless job to sum the square roots from 1 to a given number. Here are the key parts:</p>
+            <ul>
+                <li><strong>Line 2:</strong> You must declare a function in the workers global namespace with an appropriate name.
+                This function is passed a <code>Job</code> object that you use to interact with the outside world</li>
+                <li><strong>Line 4:</strong> The data for your job is contained <code>job.data</code>.
+                    This is the same data that is supplied when you <a href="#invokingJobs">invoke a job</a> to run.
+                    It has one of 3 forms: <code>string</code>,<code>DataBuffer</code> or <code>Blob</code></li>
+                <li><strong>Line 5:</strong> You always have to declare when your job is complete by passing the result data back
+                with the <code>job.complete()</code> method. As for input data, the result must be either a
+                    <code>string</code>,<code>DataBuffer</code> or <code>Blob</code></li>
+                <li><strong>Line 9:</strong> If possible, keep the outside appraised of your job's progress by passing a percentage
+                amount to <code>job.progress()</code></li>
+                <li><strong>Line 11:</strong> As per line 5, indicate result and completion by calling <code>job.complete()</code> method</li>
+            </ul>
+            <p>You can also invoke jobs to be done elsewhere from within your code as per the following (equally impractical) example</p>
+            <pre class="example sunlight-highlight-javascript" data-example="factorialWeird"></pre>
+            <p><strong>Line 8</strong> uses the <code>job.dispatch()</code> method to outsource a new job.
+            It takes 3 parameters:
+            <ul>
+                <li>The data to be passed into the new job</li>
+                <li>A callback function that receives any error response and the resultant data</li>
+                <li>The library name - optional as it defaults the same library as this one: <code>factorialWeird</code> in this case</li>
+            </ul>There are no semantics for indicating your own (application) error. You have to do this via the data returned.</p>
+        </div>
+        <h3 id="invokingJobs">Invoking jobs</h3>
+        <p>First you need to include my library called <code>VDPrequester</code>.
+            You can get this from my <a href="https://github.com/dthwaite/VDPrequester" target="_blank">GitHub</a> where full details are provided.
+            I also have <a href="http://dthwaite.github.io/docs/VDPrequester/1.0.0" target="_blank">JSdocs</a> for this library. Include the library in your site like so:
+        <pre>&lt;script href="vdprequester.min.js"&gt;&lt;/script&gt;</pre>
+        Or, for Nodejs, like so:
+        <pre>npm install VDPrequester</pre></p>
+        <p>In either case you will need to create a connection object to my server:</p>
+        <pre id="server" class="sunlight-highlight-javascript">var vdpRequester=new VDPrequester("{{server}}");</pre>
+        <p>Here are some examples. Try them by typing in a number -
+            the code displayed is exactly what is executed in this browser (I use Jquery):</p>
+        {{#each examplelibraries}}
+            <div class="panel panel-default demo" data-job="{{name}}">
+                <div class="panel-heading">
+                    <strong>
+                        {{#if link}}
+                            <a href="{{link}}" target="_blank">{{name}}</a>
+                        {{else}}
+                            {{name}}
+                        {{/if}}
+                    </strong>
+                    <br>{{description}}</div>
+                <div class="panel-body">
+                    <table>
+                        <tr>
+                            <td>Input to job:</td>
+                            <td><input type="text" class="demo-input"></td>
+                            <td><button type="button" class="btn btn-default btn-xs demo-execute">execute</button></td>
+                            <td class="demo-result label"></td>
+                        </tr>
+                    </table>
+                    <div class="javascript"></div>
+                </div>
+            </div>
+        {{/each}}
+
+        <p>As jobs are created connections are set up with the server.
+            You can clear up and close all connections with the <code>disconnect()</code> method.
+            However, results from any outstanding job requests will not be returned. You'll still be able to request
+        jobs after this (new connections will be made).</p>
+        <div class="panel panel-default demo">
+            <div class="panel-body">
+                <table>
+                    <tr>
+                        <pre id="disconnect" class="sunlight-highlight-javascript">vdpRequester.disconnect()</pre>
+                        <td><button type="button" class="btn btn-default btn-xs demo-disconnect">disconnect</button></td>
+                    </tr>
+                </table>
+                <div class="javascript"></div>
+            </div>
+        </div>
+
+        <p>To send a job, simply call the <code>send()</code>
+            method with the following parameters:
+            <ul>
+                <li>The name of the job to invoke</li>
+                 <li>The data to pass to the job (<code>string</code>, <code>ArrayBuffer</code> or <code>Blob</code>)</li>
+                <li>A function to be called when the job is complete (optional)</li>
+            </ul>
+        </p>
+
+        <p>I use the node-style callback standard whereby your call back is passed two parameters:
+        <ul>
+            <li>An error string if something went wrong, otherwise this is set to null</li>
+            <li>The data that contains the result</li>
+        </ul></p>
+        <h3>Setting up a new job</h3>
+        <p>Fill in the form below and I will check it out. If it all looks good then I'll activate on my server and off you go</p>
+        <div class="well">
+            <form>
+                <div class="form-group">
+                    <label for="email">Your email</label>
+                    <input type="email" class="form-control" id="email">
+                    <p class="help-block">I'll need this to communicate with you if there are issues and to tell you when it's all ready</p>
+                </div>
+                <div class="form-group">
+                    <label for="jobname">Job name</label>
+                    <input type="text" class="form-control" id="jobname">
+                    <p class="help-block">Provide a sensible name that is a valid javascript variable name</p>
+                </div>
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <input type="text" class="form-control" id="description">
+                    <p class="help-block">A brief, one-liner description is always nice</p>
+                </div>
+                <div class="form-group">
+                    <label for="link">Link</label>
+                    <input type="text" class="form-control" id="link" placeholder="e.g.: https://gist.github.com/...">
+                    <p class="help-block">This should be a URL to further details, or providing context to, your library code.
+                    For example, you might put it in a Github Gist which would allow review and discussion on the implemetation details.
+                    </p>
+                </div>
+                <div class="form-group">
+                    <label for="url">Javascript public URL</label>
+                    <input type="text" class="form-control" id="url">
+                    <p class="help-block">Rather necessary. The public url of your javascript file. Please do not minify it as
+                        I will want to check its OK. Naturally your code has to be open source as there are no security arrangements</p>
+                </div>
+                <div id="captcha"></div>
+                <table id="submit-section">
+                    <tr>
+                        <td><button type="submit" class="btn btn-default">Submit</button></td>
+                        <td><span id="formConfirmation" class="label label-success"><strong>OK, all good.</strong> I'll be in touch.</span></td>
+                        <td><span id="formError" class="label label-danger"></span></td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+        <p><em>Of course, you can always contact <a href="mailto:dominicthwaites@mac.com">me</a> directly</em></p>
+    </div>
+</template>

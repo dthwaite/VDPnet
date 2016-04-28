@@ -1,0 +1,56 @@
+<template name="volunteer">
+    <div class="container">
+        <div class="page-header row">
+            <h1 class="col-xs-12 col-sm-10">Volunteer the power of your device</h1>
+            {{#if connected}}
+                <h1 class="col-xs-12 col-sm-2">
+                    <button id="stopAccess" type="button" class="btn btn-danger">Stop</button>
+                </h1>
+            {{else}}
+                <h1 class="col-xs-12 col-sm-2">
+                    <button id="allowAccess" type="button" class="btn btn-success">Allow</button>
+                </h1>
+            {{/if}}
+        </div>
+        {{#if connectedOrWorkers}}
+            {{#if noWorkers}}
+                <div class="panel panel-warning">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">No one is using your power for the moment</h3>
+                    </div>
+                </div>
+            {{/if}}
+            {{#if notConnectedAndWorkers}}
+                <div class="panel panel-warning">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Waiting for existing jobs to finish</h3>
+                    </div>
+                </div>
+            {{/if}}
+            {{> worker}}
+        {{else}}
+            <div id="explanation" class="well">
+                <p>To have your browser accept work from outside please click on the <strong>Allow</strong> button.
+                    This is completely safe as there is no means for other people to access anything from your device.
+                    It only permits the use of your central processing unit (CPU).</p>
+                <p>What happens is that as work is sent to your device, one or more background jobs are started
+                    as 'workers' in your browser. These workers receive the instructions and the data to work on silently
+                    in the background. Your CPU usage will inevitably increase and it may be to such a level where the response
+                    you get from your device degrades. Only allow work when you are not busy on your device.</p>
+                <p>Your device will also receive the programs and data to work on over the internet.
+                    If you are not on an unlimited broadband connection then this may eat into your data allowance.</p>
+                <p>You can stop new work from being received by pressing the <strong>Stop</strong> button.
+                    Existing jobs that have not finished will continue.
+                    You can simply close this browser tab to abort all work immediately.</p>
+            </div>
+        {{/if}}
+        <div class="row footer">
+            <div class="col-xs-12 col-sm-5">
+                <a href="gotwork" role="button" class="btn btn-info">Got work to do?</a>
+                <a href="status" role="button" class="btn btn-info">Watch activity</a>
+            </div>
+            <em id="footnote" class="col-xs-12 col-sm-7">Experimental software by Dominic Thwaites <a href="github" target="_blank">@Github</a></em>
+        </div>
+
+    </div>
+</template>
