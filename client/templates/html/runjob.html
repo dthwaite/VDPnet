@@ -1,0 +1,24 @@
+<template name="runjob">
+    <div class="panel panel-default demo" data-job="{{name}}">
+        <div class="panel-heading">
+            <strong>
+                {{#if link}}
+                    <a href="{{link}}" target="_blank">{{name}}</a>
+                {{else}}
+                    {{name}}
+                {{/if}}
+            </strong>
+            <br>{{description}}</div>
+        <div class="panel-body">
+            <table>
+                <tr>
+                    <td>Input to job:</td>
+                    <td><input type="text" class="demo-input"></td>
+                    <td><button type="button" class="btn btn-default btn-xs demo-execute">execute</button></td>
+                    <td class="demo-result label"></td>
+                </tr>
+            </table>
+            <div class="javascript"></div>
+        </div>
+    </div>
+</template>

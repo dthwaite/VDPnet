@@ -2,6 +2,7 @@
     <div class="container">
         <div class="page-header">
             <h1>Defining and invoking jobs</h1>
+            {{> disconnect}}
         </div>
         <p>This is an experimental project and so don't expect this procedure to be all slick and fancy.
             It's all open source as is any code that executes the jobs. That said, it's pretty simple.</p>
@@ -53,28 +54,7 @@
         <p>Here are some examples. Try them by typing in a number -
             the code displayed is exactly what is executed in this browser (I use Jquery):</p>
         {{#each examplelibraries}}
-            <div class="panel panel-default demo" data-job="{{name}}">
-                <div class="panel-heading">
-                    <strong>
-                        {{#if link}}
-                            <a href="{{link}}" target="_blank">{{name}}</a>
-                        {{else}}
-                            {{name}}
-                        {{/if}}
-                    </strong>
-                    <br>{{description}}</div>
-                <div class="panel-body">
-                    <table>
-                        <tr>
-                            <td>Input to job:</td>
-                            <td><input type="text" class="demo-input"></td>
-                            <td><button type="button" class="btn btn-default btn-xs demo-execute">execute</button></td>
-                            <td class="demo-result label"></td>
-                        </tr>
-                    </table>
-                    <div class="javascript"></div>
-                </div>
-            </div>
+            {{> runjob}}
         {{/each}}
 
         <p>As jobs are created connections are set up with the server.
@@ -129,7 +109,7 @@
                     <label for="link">Link</label>
                     <input type="text" class="form-control" id="link" placeholder="e.g.: https://gist.github.com/...">
                     <p class="help-block">This should be a URL to further details, or providing context to, your library code.
-                    For example, you might put it in a Github Gist which would allow review and discussion on the implemetation details.
+                    For example, you might put it in a Github Gist which would allow review and discussion on the implementation details.
                     </p>
                 </div>
                 <div class="form-group">
@@ -142,12 +122,16 @@
                 <table id="submit-section">
                     <tr>
                         <td><button type="submit" class="btn btn-default">Submit</button></td>
-                        <td><span id="formConfirmation" class="label label-success"><strong>OK, all good.</strong> I'll be in touch.</span></td>
-                        <td><span id="formError" class="label label-danger"></span></td>
+                        <td><span id="formResponse" class="label"></span></td>
                     </tr>
                 </table>
+
             </form>
+            <div id="newjobid" class="panel panel-default">
+                <div class="panel-body">Use this ID to test your job: <samp></samp></div>
+            </div>
         </div>
-        <p><em>Of course, you can always contact <a href="mailto:dominicthwaites@mac.com">me</a> directly</em></p>
+        <a id="testajob" href="testjob" role="button" class="btn btn-info">Test a job</a>
+        <p class="text-right"><em>Of course, you can always contact <a href="mailto:dominicthwaites@mac.com">me</a> directly</em></p>
     </div>
 </template>

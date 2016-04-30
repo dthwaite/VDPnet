@@ -39,5 +39,8 @@ Template.status.helpers({
     formatTime: function(date) {
         if (typeof date=='undefined') return '';
         else return date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
+    },
+    connected: function() {
+        return Meteor.status().connected;
     }
 });

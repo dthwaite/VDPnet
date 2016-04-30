@@ -25,17 +25,18 @@ Meteor.startup(function() {
         switch (ws.protocol.charAt(0)) {
         case 'C':
             ws.libraries = [];
+            ws.maxlibraries=parseInt(ws.protocol.charAt(1));
             ws.on('message', Meteor.bindEnvironment(function(message) {
                 ws.libraries = JSON.parse(message);
                 clientDB.update(ws.clientId,{$set: {libraries: ws.libraries}});
-                findWaitingClient(ws);
+                checkAvailability(ws);
             })).on('close',Meteor.bindEnvironment(function() {
                 clientDB.remove(ws.clientId);
             }));
             ws.clientId=clientDB.insert({ip: ws.upgradeReq.connection.remoteAddress,libraries: ws.libraries});
             break;
         case 'S':
-            if (libraryDB.findOne({name: ws.protocol.substr(1),confirmed: true},{fields: {_id: 1}})) {
+            if (libraryDB.findOne({name: ws.protocol.substr(1)},{fields: {_id: 1}})) {
                 ws.available=true;
                 ws.on('close',Meteor.bindEnvironment(function() {
                     servicerDB.remove(ws.clientId);
@@ -49,7 +50,7 @@ Meteor.startup(function() {
             } else ws.close();
             break;
         case 'R':
-            if (libraryDB.findOne({name: ws.protocol.substr(1),confirmed: true},{_id: 1})) {
+            if (libraryDB.findOne({name: ws.protocol.substr(1)},{_id: 1})) {
                 ws.on('message', Meteor.bindEnvironment(function(data) {
                     requestorDB.update(ws.clientId, {$inc: {requests: 1}});
                     processRequest({
@@ -78,8 +79,8 @@ Meteor.startup(function() {
         }
     }));
 
-    function findWaitingClient(client) {
-        if (client.libraries.length<4) {
+    function checkAvailability(client) {
+        if (client.libraries.length<client.maxlibraries) {
             for (var i=0; i<waitingJobs.length; i++) {
                 if (client.libraries.indexOf(waitingJobs[i].requester.protocol.substr(1))<0) {
                     requestLibrary(client,waitingJobs[i].requester);
@@ -115,7 +116,7 @@ Meteor.startup(function() {
                 }
             }
             for (i=0; i<wss.clients.length; i++) {
-                if (wss.clients[i].protocol=='C' && wss.clients[i].libraries.length<4 && wss.clients[i].libraries.indexOf(job.requester.protocol.substr(1))<0) {
+                if (wss.clients[i].protocol.charAt(0)=='C' && wss.clients[i].libraries.length<wss.clients[i].maxlibraries && wss.clients[i].libraries.indexOf(job.requester.protocol.substr(1))<0) {
                     requestLibrary(wss.clients[i],job.requester);
                 }
             }

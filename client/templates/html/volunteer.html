@@ -11,6 +11,10 @@
                     <button id="allowAccess" type="button" class="btn btn-success">Allow</button>
                 </h1>
             {{/if}}
+            <div class="col-xs-12">
+                {{> disconnect}}
+            </div>
+
         </div>
         {{#if connectedOrWorkers}}
             {{#if noWorkers}}

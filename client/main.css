@@ -38,6 +38,10 @@ body {
     text-align: right;
 }
 
+.disconnect-notice {
+    text-align: center;
+}
+
 #explanation {
     font-size: 1.2em;
 }
@@ -89,4 +93,13 @@ form table td {
 
 #submit-section {
     margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#testjobidentry td {
+    padding-right:10px;
+}
+
+#codeintroduction, #testjoberror, #newjobid, .disconnect-notice {
+    display:none;
 }

@@ -1,0 +1,33 @@
+<template name="testjob">
+    <div class="container">
+        <div class="page-header">
+            <h1>Test your job</h1>
+            {{> disconnect}}
+        </div>
+        <p>You can test any job so long as you have its ID. This page is automatically configured to
+        run the job you submitted, thus you are not reliant on other volunteers. However, for jobs
+        that have been approved (as opposed to only submitted), it is possible for your test to run
+        on another volunteers computer.</p>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <table id="testjobidentry">
+                    <tr>
+                        <td>Input job ID:</td>
+                        <td><input type="text" class="test-input" value="{{id}}"></td>
+                        <td><button type="submit" class="btn btn-default btn-xs">Submit</button></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><p id="testjoberror" class="demo-result label label-danger"></p></td>
+                        <td></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        {{#with library}}
+            {{> runjob}}
+        {{/with}}
+        {{> worker}}
+        <p id="codeintroduction">Here's the code that implements this job</p>
+    </div>
+</template>

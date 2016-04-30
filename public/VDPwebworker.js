@@ -8,6 +8,7 @@ importScripts('https://cdn.rawgit.com/dthwaite/VDPrequester/v1.0.0/lib/vdpreques
     var jobStreamIds=1; // Incremental ids of Job streams
     var closing;        // true if this worker is closing down
     var server;         // The VDP server
+    var timeout;        // Number of seconds of activity before timeout (0=no timeout)
 
     // Sets up a listener to the controlling web page
     addEventListener('message',function(event) {
@@ -17,6 +18,7 @@ importScripts('https://cdn.rawgit.com/dthwaite/VDPrequester/v1.0.0/lib/vdpreques
             if (typeof library=='undefined') {
                 library=event.data.library;
                 server=event.data.server;
+                timeout=event.data.timeout;
                 vdpRequester=new VDPrequester(server);
                 importScripts(library.url);
                 postMessage(workerReport('wk_start'));
@@ -61,6 +63,17 @@ importScripts('https://cdn.rawgit.com/dthwaite/VDPrequester/v1.0.0/lib/vdpreques
         this.websocket.onopen=function() {
             if (closing) me.close();
         };
+        this.websocket.onclose=function() {
+            for (var i=0; i<JobStreams.length; i++) {
+                if (JobStreams[i].websocket==this) {
+                    JobStreams.splice(i,1);
+                    if (JobStreams.length==0) {
+                        postMessage(workerReport('wk_end'));
+                        self.close();
+                    }
+                }
+            }
+        };
         postMessage(this.report('js_start'));
         this.endJob();
     };
@@ -69,24 +82,17 @@ importScripts('https://cdn.rawgit.com/dthwaite/VDPrequester/v1.0.0/lib/vdpreques
         if ((this.job!==null && this.job.percent<100) || this.websocket.readyState!=1) return;
         postMessage(this.report('js_end'));
         this.websocket.close();
-        for (var i=0; i<JobStreams.length; i++) {
-            if (JobStreams[i]==this) {
-                JobStreams.splice(i,1);
-                if (JobStreams.length==0) {
-                    postMessage(workerReport('wk_end'));
-                    self.close();
-                }
-            }
-        }
     };
 
     ProductionLine.prototype.endJob=function() {
         var me=this;
         if (closing) me.close();
         else {
-            this.timer = setTimeout(function() {
-                me.close();
-            }, 100000);
+            if (timeout) {
+                this.timer = setTimeout(function() {
+                    me.close();
+                }, timeout * 1000);
+            }
         }
     };
 

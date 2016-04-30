@@ -20,7 +20,7 @@
   },
   "scripts": {
     "start": "meteor --settings settings.json run",
-    "lint": "eslint client/templates js public/*.js server"
+    "lint": "eslint client/templates/js lib client/lib public/*.js server"
   },
   "dependencies": {
     "bufferutil": "^1.2.1",
@@ -29,7 +29,7 @@
     "utf-8-validate": "^1.2.1"
   },
   "devDependencies": {
-    "eslint": "^2.2.0",
+    "eslint": "^2.2.0"
   },
   "license": "MIT",
   "engines": {
